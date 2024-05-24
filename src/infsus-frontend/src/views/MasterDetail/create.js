@@ -8,6 +8,7 @@ const MasterDetailCreate = () => {
 
     const [imepolitickestranke, setImepolitickestranke] = useState('');
     const [kratkiopisstranke, setKratkiopisstranke] = useState('');
+    const [oznakavrstepolitickestranke, setOznakaVrstePolitickeStranke] = useState('');
 
     const handleImeChange = (e) => {
         e.preventDefault();
@@ -17,11 +18,16 @@ const MasterDetailCreate = () => {
     const handleOpisChange = (e) => {
         e.preventDefault();
         setKratkiopisstranke(e.target.value);
+    };
+
+    const handleVrstaChange = (e) => {
+        e.preventDefault();
+        setOznakaVrstePolitickeStranke(e.target.value);
     }; 
 
     async function handleSubmit(e) {
         e.preventDefault();
-        await putPolitickaStranka(imepolitickestranke, kratkiopisstranke).
+        await putPolitickaStranka(imepolitickestranke, kratkiopisstranke, oznakavrstepolitickestranke).
         then(response => {
             console.log(response.data);
             navigate('/')
@@ -42,6 +48,10 @@ const MasterDetailCreate = () => {
             <label>
                 Opis stranke:
                 <input type="text" name="kratkiopisstranke" value={kratkiopisstranke} onChange={handleOpisChange}/>
+            </label>
+            <label>
+                Oznaka vrste političke stranke:
+                <input type="text" name="oznakavrstepolitickestranke" value={oznakavrstepolitickestranke} onChange={handleVrstaChange}/>
             </label>
             <input type="submit" value="Submit" />
         </form>

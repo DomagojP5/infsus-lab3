@@ -48,7 +48,7 @@ const MasterDetailForm = () => {
             Opis stranke: {politickaStranka.kratkiopisstranke}
           </div>
           <div className='type'>
-            Vrsta stranke:
+            Vrsta stranke: {politickaStranka.oznakavrstepolitičkestranke}
           </div>
         <div>--------------------------------------</div>
         <h1>Detail</h1>

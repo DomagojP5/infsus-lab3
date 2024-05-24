@@ -22,6 +22,7 @@ exports.getPolitickaStranka = async (req, res) => {
 exports.putPolitickaStranka = async (req, res) => {
   const imepolitickestranke = req.params.imepolitickestranke;
   const kratkiopisstranke = req.params.kratkiopisstranke;
+  const oznakavrstepolitickestranke = req.params.oznakavrstepolitickestranke;
   try {
     const politickaStranka = await PolitickaStranka.create({
       imepolitičkestranke: imepolitickestranke,

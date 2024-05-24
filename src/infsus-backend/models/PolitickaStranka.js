@@ -11,6 +11,10 @@ const PolitickaStranka = sequelize.define('PolitickaStranka', {
     kratkiopisstranke: {
         type: DataTypes.STRING(200),
         allowNull: false,
+    },
+    oznakavrstepolitičkestranke: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
     }
 }, {
     tableName: "politiČka_stranka",

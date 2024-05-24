@@ -50,7 +50,11 @@ const MasterDetail = () => {
                   onClick={() => {
                     masterDetailForm(politickaStranka.imepolitičkestranke)
                   }}>{politickaStranka.imepolitičkestranke}</button>
-                {politickaStranka.kratkiopisstranke}
+                {politickaStranka.kratkiopisstranke}&nbsp;
+                {politickaStranka.oznakavrstepolitičkestranke}
+                <button onClick={() => {
+                  deleteParty(politickaStranka.imepolitičkestranke);
+                }}>Obriši stranku</button>
             </li>
           ))}
         </ul>
