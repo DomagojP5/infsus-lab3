@@ -11,9 +11,9 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-app.use('/api/zastupnik', zastupnikRoutes);
-app.use('/api/izbornaJedinica', izbornaJedinicaRoutes);
-app.use('/api/politickaStranka', politickaStrankaRoutes);
+app.use('/api/zastupnici', zastupnikRoutes);
+app.use('/api/izborneJedinice', izbornaJedinicaRoutes);
+app.use('/api/politickeStranke', politickaStrankaRoutes);
 
 const PORT = process.env.PORT || 5000;
 sequelize.sync().then(() => {

@@ -20,6 +20,8 @@
     "express": "^4.19.2",
     "pg": "^8.11.5",
     "pg-hstore": "^2.3.4",
+    "react-bootstrap": "^2.10.2",
+    "react-bootstrap-validation": "^0.1.11",
     "sequelize": "^6.37.3"
   },
   "devDependencies": {
