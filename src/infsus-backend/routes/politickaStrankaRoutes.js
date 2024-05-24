@@ -3,7 +3,8 @@ const politickaStrankaController = require('../controllers/politickaStrankaContr
 const router = express.Router();
 
 router.get('/all', politickaStrankaController.getAllPolitickeStranke);
-router.put('/create/:imepolitickestranke/:kratkiopisstranke', politickaStrankaController.putPolitickaStranka);
+router.put('/create/:imepolitickestranke/:kratkiopisstranke/:oznakavrstepolitickestranke', politickaStrankaController.putPolitickaStranka);
+router.delete('/delete/:imepolitickestranke', politickaStrankaController.deletePolitickaStranka);
 router.get('/:name', politickaStrankaController.getPolitickaStranka);
 
 module.exports = router;

@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { fetchPolitickeStranke } from '../../services/api';
+import { fetchPolitickeStranke, deletePolitickaStranka } from '../../services/api';
 import { useNavigate } from "react-router-dom";
 
 const MasterDetail = () => {
   
   const navigate = useNavigate(); 
+  const [politickeStranke, setPolitickeStranke] = useState([]);
+  const [changeState, setChangeState] = useState(false);
+
   
   function masterDetailForm(imepolitičkestranke) {
     navigate('/masterDetailForm/'+imepolitičkestranke);
   };
 
-  const [politickeStranke, setPolitickeStranke] = useState([]);
   useEffect(() => {
     const getPolitickeStranke = async () => {
         try {
@@ -22,7 +24,18 @@ const MasterDetail = () => {
       };
   
       getPolitickeStranke();
-    }, []);
+    }, [changeState]);
+
+    async function deleteParty(imepolitickestranke) {
+      await deletePolitickaStranka(imepolitickestranke).
+      then(response => {
+        console.log(response.data);
+        setChangeState(!changeState)
+      })
+      .catch(error => {
+          console.error('Error deleting party:', error);
+      });
+  }
   
     return (
       <div>

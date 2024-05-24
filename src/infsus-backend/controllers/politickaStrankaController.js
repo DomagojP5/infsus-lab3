@@ -25,7 +25,20 @@ exports.putPolitickaStranka = async (req, res) => {
   try {
     const politickaStranka = await PolitickaStranka.create({
       imepolitičkestranke: imepolitickestranke,
-      kratkiopisstranke: kratkiopisstranke
+      kratkiopisstranke: kratkiopisstranke,
+      oznakavrstepolitičkestranke:oznakavrstepolitickestranke
+    })
+    res.json(politickaStranka);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+exports.deletePolitickaStranka = async (req, res) => {
+  const imepolitickestranke = req.params.imepolitickestranke;
+  try {
+    const politickaStranka = await PolitickaStranka.destroy({
+      where: {imepolitičkestranke: imepolitickestranke}
     })
     res.json(politickaStranka);
   } catch (error) {

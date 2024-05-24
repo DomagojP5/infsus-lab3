@@ -27,6 +27,10 @@ export const fetchPolitickaStranka = async (name) => {
 export const putPolitickaStranka = async (imepolitickestranke, kratkiopisstranke) => {
   try {
     const response = await api.put(`/politickeStranke/create/${imepolitickestranke}/${kratkiopisstranke}`)
+
+export const deletePolitickaStranka = async (imepolitickestranke) => {
+  try {
+    const response = await api.delete(`/politickeStranke/delete/${imepolitickestranke}`)
     return response.data;
   } catch (error) {
     console.log(error)
