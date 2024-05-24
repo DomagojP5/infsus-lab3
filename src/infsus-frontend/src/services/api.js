@@ -23,3 +23,12 @@ export const fetchPolitickaStranka = async (name) => {
     console.log(error)
   }
 };
+
+export const putPolitickaStranka = async (imepolitickestranke, kratkiopisstranke) => {
+  try {
+    const response = await api.put(`/politickeStranke/create/${imepolitickestranke}/${kratkiopisstranke}`)
+    return response.data;
+  } catch (error) {
+    console.log(error)
+  }
+};

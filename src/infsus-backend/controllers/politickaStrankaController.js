@@ -18,3 +18,17 @@ exports.getPolitickaStranka = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+exports.putPolitickaStranka = async (req, res) => {
+  const imepolitickestranke = req.params.imepolitickestranke;
+  const kratkiopisstranke = req.params.kratkiopisstranke;
+  try {
+    const politickaStranka = await PolitickaStranka.create({
+      imepolitičkestranke: imepolitickestranke,
+      kratkiopisstranke: kratkiopisstranke
+    })
+    res.json(politickaStranka);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};

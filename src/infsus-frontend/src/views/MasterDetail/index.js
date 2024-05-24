@@ -7,7 +7,6 @@ const MasterDetail = () => {
   const navigate = useNavigate(); 
   
   function masterDetailForm(imepolitičkestranke) {
-    console.log(imepolitičkestranke)
     navigate('/masterDetailForm/'+imepolitičkestranke);
   };
 
@@ -28,6 +27,9 @@ const MasterDetail = () => {
     return (
       <div>
         <h1>Političke stranke</h1>
+        <button onClick={() => {
+              navigate('/masterDetail/create');
+            }}>Stvori novu stranku</button>
         <ul>
           {politickeStranke.map(politickaStranka => (
             <li key={politickaStranka.imepolitičkestranke}>
