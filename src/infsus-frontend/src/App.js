@@ -1,14 +1,12 @@
-// App.js
-
 import React from 'react';
-import './App.css'; // Import any necessary CSS
+import './App.css';
+import MasterDetail from './views/MasterDetail/index'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Welcome to My App</h1>
-      </header>
+    <div>
+      <h1>Izborni informacijski sustav</h1>
+      <MasterDetail />
     </div>
   );
 }
