@@ -10,7 +10,6 @@ const SifrarnikCreate = () => {
     const [opis, setOpis] = useState('');
     const [brojBiraca, setBrojBiraca] = useState('');
     const [errors, setErrors] = useState({});
-    const [izborneJedinice, setIzborneJedinice] = useState([]);
 
     const handleRedniBrojIzbJedChange = (e) => {
         e.preventDefault();
