@@ -47,10 +47,10 @@ const EditZastupnikForm = () => {
 
     return (
         <div>
-            <button onClick={() => {navigate(`/masterDetailForm/${zastupnik.imepolitickestranke}`);}}>Nazad</button>
+            <button onClick={() => {navigate(`/masterDetailForm/${zastupnik.imepolitičkestranke}`);}}>Nazad</button>
             <form onSubmit={handleSubmit}>
             <label>
-                Ime Zastupnika:
+                Ime zastupnika:
                 <input type="text" name="imezastupnika" value={zastupnik.imezastupnika} onChange={handleChange} />
             </label>
             <br />
@@ -65,12 +65,12 @@ const EditZastupnikForm = () => {
             </label>
             <br />
             <label>
-                Redni Broj Izborne Jedinice:
+                Redni broj izborne jedinice:
                 <input type="number" name="rednibrojizbjed" value={zastupnik.rednibrojizbjed} onChange={handleChange} />
             </label>
             <br />
             <label>
-                Ime Političke Stranke:
+                Ime političke stranke:
                 <input type="text" name="imepolitickestranke" value={zastupnik.imepolitičkestranke} onChange={handleChange} />
             </label>
             <br />
