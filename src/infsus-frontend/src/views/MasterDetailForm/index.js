@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { fetchPolitickaStranka, fetchZastupnici, fetchImeVrstePolitickeStranke} from '../../services/api';
+import { fetchPolitickaStranka, fetchZastupnici, fetchImeVrstePolitickeStranke, deleteZastupnik} from '../../services/api';
 import { useNavigate } from "react-router-dom";
 
 const MasterDetailForm = () => {
@@ -38,6 +38,15 @@ const MasterDetailForm = () => {
       getZastupnici();
     }, []);
 
+    const izbrisiZastupnika = async(imezastupnika, imepolitičkestranke) => {
+      try {
+        const respone = await deleteZastupnik(imezastupnika, imepolitičkestranke);
+        await getZastupnici();
+      } catch (error) {
+        console.error('Error deleting zastupnik:', error);
+      }
+    }
+
     return (
       <div>
         <div>
@@ -65,7 +74,7 @@ const MasterDetailForm = () => {
               <div className='atribute'>Spol: {zastupnik.spolzastupnika}</div>
               <div className='atribute'>Redni broj izborne jedinice: {zastupnik.rednibrojizbjed}</div>
               <button onClick={() => {navigate(`/zastupnici/${zastupnik.idzastupnika}/edit`)}}>Promijeni</button>
-              <button onClick={() => {navigate(`/`)}}>Izbriši</button>
+              <button onClick={() => {izbrisiZastupnika(zastupnik.imezastupnika, zastupnik.imepolitičkestranke)}}>Izbriši</button>
             </li>
           ))}
         </ul>

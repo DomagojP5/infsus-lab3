@@ -75,3 +75,19 @@ exports.createZastupnik = async (req, res) => {
         res.status(500).json({ message: 'Internal Server Error' });
     }
 };
+
+exports.deleteZastupnik = async (req, res) => {
+  const { imezastupnika, imepolitickestranke } = req.params;
+  try {
+    const zastupnik = await Zastupnik.destroy({
+      where: {
+        imezastupnika: imezastupnika,
+        imepolitičkestranke: imepolitickestranke
+      }
+    });
+    res.json(zastupnik);
+  } catch (error) {
+    console.error('Error deleting zastupnik:', error);
+    res.status(500).json({ message: error.message });
+  }
+}

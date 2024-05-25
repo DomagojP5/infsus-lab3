@@ -65,13 +65,22 @@ export const updateZastupnik = async (id, data) => {
 
 export const createZastupnik = async (stranka, zastupnikData) => {
   try {
-    const { imezastupnika, godinezastupnika, spolzastupnika, rednibrojizbjed, imepolitičkestranke } = zastupnikData
     const response = await api.post(`/zastupnici/add/${stranka}`, zastupnikData);
     return response.data
   } catch (error) {
     console.error('Error creating zastupnik', error);
   }
+};
+
+export const deleteZastupnik = async (imezastupnika, imepolitičkestranke) => {
+  try {
+    const response = await api.delete(`/zastupnici/delete/${imezastupnika}/${imepolitičkestranke}`)
+    return response.data;
+  } catch (error) {
+    console.log(error)
+  }
 }
+
 //vrsta politicke stranke
 export const fetchImeVrstePolitickeStranke = async (id) => {
   try {
