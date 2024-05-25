@@ -39,7 +39,7 @@ const SifrarnikCreate = () => {
         if (!brojBiraca) newErrors.brojBiraca = "Broj birača je obavezan"
         if (isNaN(brojBiraca)) newErrors.brojBiraca = "Broj birača mora biti broj"
         
-        try {
+        try { // složenije pravilo
             const response = await fetchIzborneJedinice();
             let maxNumber = response[0].brojbirača;
             let sum = 0;
@@ -48,7 +48,7 @@ const SifrarnikCreate = () => {
             }
             let current = sum;
             sum = sum + parseInt(brojBiraca);
-            if (sum > maxNumber) newErrors.brojBiraca = "Broj birača je prevelik. Broj slobodnih birača je " + (parseInt(maxNumber) - parseInt(current));
+            if (sum > maxNumber) newErrors.brojBiraca = "Broj birača je prevelik. Broj birača koji je ostao slobodan " + (parseInt(maxNumber) - parseInt(current));
         } catch (error) {
             console.error('Error fetching politicke stranke:', error);
         }

@@ -61,9 +61,6 @@ const MasterDetailCreate = () => {
         if (!kratkiopisstranke) newErrors.kratkiopisstranke = "Opis stranke je obavezan"
         if (kratkiopisstranke.length > 200) newErrors.kratkiopisstranke = "Opis stranke mora biti manji od 200 znakova"
 
-        if (!oznakavrstepolitickestranke) newErrors.oznakavrstepolitickestranke = "Oznaka vrste političke stranke je obavezna"
-        //if (isNaN(oznakavrstepolitickestranke)) newErrors.oznakavrstepolitickestranke = "" // treba dodati da se bira ime vrste pol. stranke, a ne oznaka
-
         if (Object.keys(newErrors).length > 0) {
             setErrors(newErrors);
         } else {
