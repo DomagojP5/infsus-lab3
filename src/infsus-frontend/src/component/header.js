@@ -17,7 +17,7 @@ const Header = () => {
             <a href='/' className='navbar-item-link'>Master-detail</a>
         </div>
         <div className='site'>
-            <a href='/sifrarnik' className='navbar-item-link'>Šifrarnika detaila</a>
+            <a href='/sifrarnik' className='navbar-item-link'>Šifrarnik detaila</a>
         </div>
       </div>
     );
