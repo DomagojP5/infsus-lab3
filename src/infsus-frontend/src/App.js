@@ -5,13 +5,17 @@ import MasterDetailForm from './views/MasterDetailForm/index'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import MasterDetailCreate from './views/MasterDetail/create';
 import EditZastupnikForm from './views/MasterDetailForm/edit';
+import Sifrarnik from './views/Sifrarnik/index';
+import Header from './component/header'
 
 function App() {
   return (
     <div>
       <Router>
+        <Header />
         <Routes>
           <Route path="/" element={<MasterDetail/>}/>
+          <Route path="/sifrarnik" element={< Sifrarnik/>}/>
           <Route path="/masterDetailForm/:name" element={<MasterDetailForm/>}/>
           <Route path="/masterDetail/create" element={<MasterDetailCreate/>}/>
           <Route path="/zastupnici/:id/edit" element={<EditZastupnikForm />} />
