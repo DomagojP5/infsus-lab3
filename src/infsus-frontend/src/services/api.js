@@ -41,3 +41,24 @@ export const deletePolitickaStranka = async (imepolitickestranke) => {
     console.log(error)
   }
 };
+
+export const fetchZastupnik = async (id) => {
+  try {
+    console.log(`Fetching zastupnik with id: ${id}`);
+    const response = await api.get(`/zastupnici/${id}/edit`);
+    console.log('Response received from API:', response.data);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching zastupnik by id inside api.js:', error)
+  }
+
+};
+
+export const updateZastupnik = async (id, data) => {
+  try {    
+    const response = await api.put(`/zastupnici/${id}/edit`, data)
+    return response.data
+  } catch (error) {
+    console.log('Error updating zastupnik in api.js:', error);
+  }
+};

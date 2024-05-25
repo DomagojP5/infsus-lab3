@@ -59,6 +59,7 @@ const MasterDetailForm = () => {
               <div className='atribute'>Godine: {zastupnik.godinezastupnika}</div>
               <div className='atribute'>Spol: {zastupnik.spolzastupnika}</div>
               <div className='atribute'>Redni broj izborne jedinice: {zastupnik.rednibrojizbjed}</div>
+              <button onClick={() => {navigate(`/zastupnici/${zastupnik.idzastupnika}/edit`)}}>Promijeni</button>
             </li>
           ))}
         </ul>
