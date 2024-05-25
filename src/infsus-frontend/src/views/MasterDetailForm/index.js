@@ -55,6 +55,7 @@ const MasterDetailForm = () => {
           </div>
         <div>--------------------------------------</div>
         <h1>Detail</h1>
+        <button onClick={() => {navigate(`/zastupnici/add/${name}`)}}>Dodaj</button>
         <ul>
           {zastupnici.map(zastupnik => (
             <li key={zastupnik.idzastupnika}>

@@ -4,10 +4,8 @@ const router = express.Router();
 
 router.get('/', zastupnikController.getAllZastupnici);
 router.get('/:name', zastupnikController.getZastupnici);
-router.get('/:id/edit', (req, res, next) => {
-    console.log('Reached zastupnik route with ID:', req.params.id);
-    next();
-}, zastupnikController.getZastupnikById);
+router.get('/:id/edit', zastupnikController.getZastupnikById);
 router.put('/:id/edit', zastupnikController.updateZastupnik);
+router.post('/add/:stranka', zastupnikController.createZastupnik)
 
 module.exports = router;

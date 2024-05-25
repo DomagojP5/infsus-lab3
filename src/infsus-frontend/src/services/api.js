@@ -46,9 +46,7 @@ export const fetchZastupnici = async (name) => {
 
 export const fetchZastupnik = async (id) => {
   try {
-    console.log(`Fetching zastupnik with id: ${id}`);
     const response = await api.get(`/zastupnici/${id}/edit`);
-    console.log('Response received from API:', response.data);
     return response.data;
   } catch (error) {
     console.error('Error fetching zastupnik by id inside api.js:', error)
@@ -65,6 +63,15 @@ export const updateZastupnik = async (id, data) => {
   }
 };
 
+export const createZastupnik = async (stranka, zastupnikData) => {
+  try {
+    const { imezastupnika, godinezastupnika, spolzastupnika, rednibrojizbjed, imepolitičkestranke } = zastupnikData
+    const response = await api.post(`/zastupnici/add/${stranka}`, zastupnikData);
+    return response.data
+  } catch (error) {
+    console.error('Error creating zastupnik', error);
+  }
+}
 //vrsta politicke stranke
 export const fetchImeVrstePolitickeStranke = async (id) => {
   try {
