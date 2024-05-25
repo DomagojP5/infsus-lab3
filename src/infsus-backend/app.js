@@ -4,6 +4,7 @@ const cors = require('cors');
 const zastupnikRoutes = require('./routes/zastupnikRoutes');
 const izbornaJedinicaRoutes = require('./routes/izbornaJedinicaRoutes');
 const politickaStrankaRoutes = require('./routes/politickaStrankaRoutes');
+const vrstaPolitickaStrankaRoutes = require('./routes/vrstaPolitickeStrankeRoutes');
 
 const sequelize = require('./config/db');
 
@@ -14,6 +15,7 @@ app.use(bodyParser.json());
 app.use('/api/zastupnici', zastupnikRoutes);
 app.use('/api/izborneJedinice', izbornaJedinicaRoutes);
 app.use('/api/politickeStranke', politickaStrankaRoutes);
+app.use('/api/vrstaPolitickeStranke', vrstaPolitickaStrankaRoutes);
 
 const PORT = process.env.PORT || 5000;
 sequelize.sync().then(() => {

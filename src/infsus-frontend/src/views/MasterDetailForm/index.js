@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { fetchPolitickaStranka, fetchZastupnici} from '../../services/api';
+import { fetchPolitickaStranka, fetchZastupnici, fetchImeVrstePolitickeStranke} from '../../services/api';
 import { useNavigate } from "react-router-dom";
 
 const MasterDetailForm = () => {
@@ -7,6 +7,7 @@ const MasterDetailForm = () => {
     const navigate = useNavigate(); 
     const [politickaStranka, setPolitickaStranka] = useState([]);
     const [zastupnici, setZastupnici] = useState([]);
+    const [imeVrstePolitickeStranke, setImeVrstePolitickeStranke] = useState([]);
 
     var str = window.location.href;
     var n = str.lastIndexOf('/');
@@ -16,6 +17,8 @@ const MasterDetailForm = () => {
     const getPolitickaStranka = async () => {
       try {
         const response = await fetchPolitickaStranka(name);
+        const imevrstepolitičkestranke = await fetchImeVrstePolitickeStranke(response.oznakavrstepolitičkestranke)
+        setImeVrstePolitickeStranke(imevrstepolitičkestranke)
         setPolitickaStranka(response);
       } catch (error) {
         console.error('error with fetching political party', error);
@@ -48,7 +51,7 @@ const MasterDetailForm = () => {
             Opis stranke: {politickaStranka.kratkiopisstranke}
           </div>
           <div className='type'>
-            Vrsta stranke: {politickaStranka.oznakavrstepolitičkestranke}
+            Vrsta stranke: {imeVrstePolitickeStranke}
           </div>
         <div>--------------------------------------</div>
         <h1>Detail</h1>
