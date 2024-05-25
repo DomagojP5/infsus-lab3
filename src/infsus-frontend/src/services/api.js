@@ -111,7 +111,24 @@ export const fetchIzborneJedinice = async () => {
   }
 };
 
-//izborne jedinice
+export const fetchIzbornaJedinica = async (id) => {
+  try {
+    const response = await api.get(`/izborneJedinice/`+id)
+    return response.data;
+  } catch (error) {
+    console.log(error)
+  }
+};
+
+export const updateIzbornaJedinica = async (izbornaJedinica) => {
+  try {
+    const response = await api.put('/izborneJedinice/update/', izbornaJedinica)
+    return response.data;
+  } catch (error) {
+    console.log(error)
+  }
+};
+
 export const putIzbornaJedinica = async (redniBrojIzbJed, opis, brojBiraca) => {
   try {
     const response = await api.put(`/izborneJedinice/create/${redniBrojIzbJed}/${opis}/${brojBiraca}`)

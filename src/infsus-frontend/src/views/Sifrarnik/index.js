@@ -32,15 +32,8 @@ const Sifrarnik = () => {
     }
 
     async function editIzbornaJedinica() {
-        //   await deletePolitickaStranka(imepolitickestranke).
-        //   then(response => {
-        //     console.log(response.data);
-        //     setChangeState(!changeState)
-        //   })
-        //   .catch(error => {
-        //       console.error('Error deleting party:', error);
-        //   });
-        }
+
+    }
   
     return (
       <div>
@@ -49,14 +42,14 @@ const Sifrarnik = () => {
               navigate('./create');
             }}>Stvori novu izbornu jedinicu</button>
         <ul>
-          {izborneJedinice.map(izbornaJedinica => (
+          {izborneJedinice.sort((a, b) => a.rednibrojizbjed - b.rednibrojizbjed).map(izbornaJedinica => (
             <li key={izbornaJedinica.rednibrojizbjed}>
                 {izbornaJedinica.rednibrojizbjed}&nbsp;
                 {izbornaJedinica.opis}&nbsp;
                 {izbornaJedinica.brojbirača}
-                {/* <button onClick={() => {
-                  editIzbornaJedinica();
-                }}>Uredi izbornu jedinicu</button> */}
+                <button onClick={() => {
+                  navigate('./edit/'+izbornaJedinica.rednibrojizbjed);
+                }}>Uredi izbornu jedinicu</button>
                 <button onClick={() => {
                   deleteConstituency(izbornaJedinica.rednibrojizbjed);
                 }}>Obriši izbornu jedinicu</button>

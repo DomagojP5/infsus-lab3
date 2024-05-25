@@ -7,6 +7,7 @@ import MasterDetailCreate from './views/MasterDetail/create';
 import EditZastupnikForm from './views/MasterDetailForm/editZastupnik';
 import Sifrarnik from './views/Sifrarnik/index';
 import SifrarnikCreate from './views/Sifrarnik/create';
+import SifrarnikEdit from './views/Sifrarnik/edit';
 import Header from './component/header'
 import AddZastupnikForm from './views/MasterDetailForm/addZastupnik';
 
@@ -19,6 +20,7 @@ function App() {
           <Route path="/" element={<MasterDetail/>}/>
           <Route path="/sifrarnik" element={< Sifrarnik/>}/>
           <Route path="/sifrarnik/create" element={< SifrarnikCreate/>}/>
+          <Route path="/sifrarnik/edit/:id" element={< SifrarnikEdit/>}/>
           <Route path="/masterDetailForm/:name" element={<MasterDetailForm/>}/>
           <Route path="/masterDetail/create" element={<MasterDetailCreate/>}/>
           <Route path="/zastupnici/:id/edit" element={<EditZastupnikForm />} />
