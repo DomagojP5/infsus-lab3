@@ -73,7 +73,10 @@ const EditZastupnikForm = () => {
                 <br />
                 <label>
                     Spol:
-                    <input type="text" name="spolzastupnika" value={zastupnik.spolzastupnika} onChange={handleChange} />
+                    <select name="spolzastupnika" value={zastupnik.spolzastupnika} onChange={handleChange}>
+                        <option value="m">m</option>
+                        <option value="ž">ž</option>
+                    </select>
                 </label>
                 <br />
                 <label>
@@ -82,7 +85,7 @@ const EditZastupnikForm = () => {
                         {izborneJedinice.map((jedinica) => (
                             jedinica.rednibrojizbjed !== 0 && (
                             <option key={jedinica.rednibrojizbjed} value={jedinica.rednibrojizbjed}>
-                                {jedinica.rednibrojizbjed}
+                                { jedinica.opis}
                             </option>
                             )
                         ))}

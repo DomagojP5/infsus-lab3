@@ -91,6 +91,16 @@ export const fetchImeVrstePolitickeStranke = async (id) => {
   }
 };
 
+export const fetchVrstePolitickeStranke = async () => {
+  try {
+    const response = await api.get(`/vrstaPolitickeStranke/all`)
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching vrste politicke stranke:', error);
+    return [];
+  }
+};
+
 //izborne jedinice
 export const fetchIzborneJedinice = async () => {
   try {

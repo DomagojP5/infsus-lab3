@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
-import { putPolitickaStranka, fetchPolitickeStranke} from '../../services/api';
+import { putPolitickaStranka, fetchPolitickeStranke, fetchVrstePolitickeStranke} from '../../services/api';
 
 const MasterDetailCreate = () => {
 
@@ -10,6 +10,19 @@ const MasterDetailCreate = () => {
     const [kratkiopisstranke, setKratkiopisstranke] = useState('');
     const [oznakavrstepolitickestranke, setOznakaVrstePolitickeStranke] = useState('');
     const [errors, setErrors] = useState({});
+    const [vrstePolitickeStranke, setVrstePolitickeStranke] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetchVrstePolitickeStranke();
+                setVrstePolitickeStranke(response);
+            } catch (error) {
+                console.error('Error fetching politicke stranke:', error);
+            }
+        };
+        fetchData();
+    }, []);
 
     const handleImeChange = (e) => {
         e.preventDefault();
@@ -79,16 +92,24 @@ const MasterDetailCreate = () => {
             <div>
                 <label>
                     Opis stranke:
-                    <input type="text" name="kratkiopisstranke" value={kratkiopisstranke} onChange={handleOpisChange}/>
+                    <textarea name="kratkiopisstranke" value={kratkiopisstranke} onChange={handleOpisChange} />
                 </label>
                 {errors.kratkiopisstranke && <div style={{ color: 'red' }}>{errors.kratkiopisstranke}</div>}
             </div>
             <div>
                 <label>
                     Oznaka vrste političke stranke:
-                    <input type="text" name="oznakavrstepolitickestranke" value={oznakavrstepolitickestranke} onChange={handleVrstaChange}/>
+                    <select name="oznakavrstepolitickestranke" value={oznakavrstepolitickestranke} onChange={handleVrstaChange}>
+                        {vrstePolitickeStranke.map((vrsta) => (
+                            <option key={vrsta.oznakavrstepolitičkestranke} value={vrsta.oznakavrstepolitičkestranke}>
+                                {vrsta.oznakavrstepolitičkestranke} {vrsta.imevrstepolitičkestranke}
+                            </option>
+                        ))}
+                    </select>
                 </label>
                 {errors.oznakavrstepolitickestranke && <div style={{ color: 'red' }}>{errors.oznakavrstepolitickestranke}</div>}
+            </div>
+            <div>
                 <input type="submit" value="Submit" />
             </div>
         </form>
