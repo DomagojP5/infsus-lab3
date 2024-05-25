@@ -8,8 +8,8 @@ const AddZastupnikForm = () => {
     const [zastupnik, setZastupnik] = useState({
         imezastupnika: '',
         godinezastupnika: '',
-        spolzastupnika: '',
-        rednibrojizbjed: '',
+        spolzastupnika: 'm',
+        rednibrojizbjed: '1',
         imepolitičkestranke: name
     });
     const [izborneJedinice, setIzborneJedinice] = useState([]);

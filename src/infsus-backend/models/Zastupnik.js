@@ -24,6 +24,7 @@ const Zastupnik = sequelize.define('Zastupnik', {
   },
   rednibrojizbjed: {
     type: DataTypes.INTEGER,
+    allowNull: false,
     references: {
       model: IzbornaJedinica,
       key: 'redniBrojIzbJed',
