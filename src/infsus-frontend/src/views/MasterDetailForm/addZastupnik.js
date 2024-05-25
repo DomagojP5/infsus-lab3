@@ -5,7 +5,7 @@ import { createZastupnik, fetchIzborneJedinice } from '../../services/api';
 const AddZastupnikForm = () => {
     const { name }= useParams();
     const navigate = useNavigate();
-    const [zastupnikData, setZastupnikData] = useState({
+    const [zastupnik, setZastupnik] = useState({
         imezastupnika: '',
         godinezastupnika: '',
         spolzastupnika: '',
@@ -16,7 +16,7 @@ const AddZastupnikForm = () => {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setZastupnikData(prevData => ({
+        setZastupnik(prevData => ({
             ...prevData,
             [name]: value
         }));
@@ -25,8 +25,8 @@ const AddZastupnikForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await createZastupnik(zastupnikData.imepolitičkestranke, zastupnikData); 
-            navigate(`/masterDetailForm/${zastupnikData.imepolitičkestranke}`);
+            await createZastupnik(zastupnik.imepolitičkestranke, zastupnik); 
+            navigate(`/masterDetailForm/${zastupnik.imepolitičkestranke}`);
         } catch (error) {
             console.error('Error creating zastupnik:', error);
         }
@@ -47,27 +47,27 @@ const AddZastupnikForm = () => {
 
     return (
         <div>
-            <button onClick={() => {navigate(`/masterDetailForm/${zastupnikData.imepolitičkestranke}`);}}>Nazad</button>
+            <button onClick={() => {navigate(`/masterDetailForm/${zastupnik.imepolitičkestranke}`);}}>Nazad</button>
             <h2>Dodaj zastupnika</h2>
             <form onSubmit={handleSubmit}>
                 <label>
                     Ime zastupnika:
-                    <input type="text" name="imezastupnika" value={zastupnikData.imezastupnika} onChange={handleChange} />
+                    <input type="text" name="imezastupnika" value={zastupnik.imezastupnika} onChange={handleChange} />
                 </label>
                 <br />
                 <label>
                     Godine:
-                    <input type="number" name="godinezastupnika" value={zastupnikData.godinezastupnika} onChange={handleChange} />
+                    <input type="number" name="godinezastupnika" value={zastupnik.godinezastupnika} onChange={handleChange} />
                 </label>
                 <br />
                 <label>
                     Spol:
-                    <input type="text" name="spolzastupnika" value={zastupnikData.spolzastupnika} onChange={handleChange} />
+                    <input type="text" name="spolzastupnika" value={zastupnik.spolzastupnika} onChange={handleChange} />
                 </label>
                 <br />
                 <label>
                     Redni broj izborne jedinice:
-                    <select name="rednibrojizbjed" value={zastupnikData.rednibrojizbjed} onChange={handleChange}>
+                    <select name="rednibrojizbjed" value={zastupnik.rednibrojizbjed} onChange={handleChange}>
                         {izborneJedinice.map((jedinica) => (
                             jedinica.rednibrojizbjed !== 0 && (
                             <option key={jedinica.rednibrojizbjed} value={jedinica.rednibrojizbjed}>
@@ -80,7 +80,7 @@ const AddZastupnikForm = () => {
                 <br />
                 <label>
                     Ime političke stranke:
-                    <input type="text" name="imepolitičkestranke" value={zastupnikData.imepolitičkestranke} disabled 
+                    <input type="text" name="imepolitičkestranke" value={zastupnik.imepolitičkestranke} disabled 
                     onChange={handleChange} style={{ width: '15%', minWidth: '200px' }}/>
                 </label>
                 <br />

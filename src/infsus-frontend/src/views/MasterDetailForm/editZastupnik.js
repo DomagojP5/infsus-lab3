@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from "react-router-dom";
-import { fetchZastupnik, updateZastupnik } from '../../services/api';
+import { fetchZastupnik, updateZastupnik, fetchIzborneJedinice } from '../../services/api';
 
 const EditZastupnikForm = () => {
     const { id } = useParams();
@@ -12,20 +12,31 @@ const EditZastupnikForm = () => {
         rednibrojizbjed: '',
         imepolitickestranke: ''
     });
+    const [izborneJedinice, setIzborneJedinice] = useState([]);
 
+    const fetchJedinice = async () => {
+        try {
+            const data = await fetchIzborneJedinice();
+            setIzborneJedinice(data);
+        } catch (error) {
+            console.error('Error fetching izborne jedinice:', error);
+        }
+    }
+
+    const getZastupnik = async () => {
+        try {
+            const response = await fetchZastupnik(id);
+            setZastupnik(response);
+        } catch (error) {
+            console.error('Error fetching zastupnik:', error)
+        }
+    };
 
     useEffect(() => {
-        const getZastupnik = async () => {
-            try {
-                const response = await fetchZastupnik(id);
-                setZastupnik(response);
-            } catch (error) {
-                console.error('Error fetching zastupnik:', error)
-            }
-        };
 
         getZastupnik();
-    }, [id])
+        fetchJedinice();
+    }, [])
 
     const handleChange = (e) => {
         const {name, value} = e.target;
@@ -68,11 +79,13 @@ const EditZastupnikForm = () => {
                 <label>
                     Redni broj izborne jedinice:
                     <select name="rednibrojizbjed" value={zastupnik.rednibrojizbjed} onChange={handleChange}>
-                            {[...Array(12).keys()].map((num) => (
-                                <option key={num + 1} value={num + 1}>
-                                    {num + 1}
-                                </option>
-                            ))}
+                        {izborneJedinice.map((jedinica) => (
+                            jedinica.rednibrojizbjed !== 0 && (
+                            <option key={jedinica.rednibrojizbjed} value={jedinica.rednibrojizbjed}>
+                                {jedinica.rednibrojizbjed}
+                            </option>
+                            )
+                        ))}
                     </select>
                 </label>
                 <br />

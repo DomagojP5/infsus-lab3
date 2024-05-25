@@ -54,6 +54,7 @@ const MasterDetailForm = () => {
             Vrsta stranke: {imeVrstePolitickeStranke}
           </div>
         <div>--------------------------------------</div>
+        <button onClick={() => {navigate(`/`)}}>Promijeni</button>
         <h1>Detail</h1>
         <button onClick={() => {navigate(`/zastupnici/add/${name}`)}}>Dodaj</button>
         <ul>
@@ -64,6 +65,7 @@ const MasterDetailForm = () => {
               <div className='atribute'>Spol: {zastupnik.spolzastupnika}</div>
               <div className='atribute'>Redni broj izborne jedinice: {zastupnik.rednibrojizbjed}</div>
               <button onClick={() => {navigate(`/zastupnici/${zastupnik.idzastupnika}/edit`)}}>Promijeni</button>
+              <button onClick={() => {navigate(`/`)}}>Izbriši</button>
             </li>
           ))}
         </ul>
