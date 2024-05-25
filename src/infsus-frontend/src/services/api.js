@@ -78,7 +78,26 @@ export const fetchImeVrstePolitickeStranke = async (id) => {
 //izborne jedinice
 export const fetchIzborneJedinice = async () => {
   try {
-    const response = await api.get(`/izborneJedinice`)
+    const response = await api.get(`/izborneJedinice/all`)
+    return response.data;
+  } catch (error) {
+    console.log(error)
+  }
+};
+
+//izborne jedinice
+export const putIzbornaJedinica = async (redniBrojIzbJed, opis, brojBiraca) => {
+  try {
+    const response = await api.put(`/izborneJedinice/create/${redniBrojIzbJed}/${opis}/${brojBiraca}`)
+    return response.data;
+  } catch (error) {
+    console.log(error)
+  }
+};
+
+export const deleteIzbornaJedinica = async (redniBrojIzbJed) => {
+  try {
+    const response = await api.delete(`/izborneJedinice/delete/${redniBrojIzbJed}`)
     return response.data;
   } catch (error) {
     console.log(error)

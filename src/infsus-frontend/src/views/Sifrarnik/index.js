@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { fetchIzborneJedinice } from '../../services/api';
+import { fetchIzborneJedinice, deleteIzbornaJedinica } from '../../services/api';
 import { useNavigate } from "react-router-dom";
 
 const Sifrarnik = () => {
   
   const navigate = useNavigate(); 
   const [izborneJedinice, setIzborneJedinice] = useState([]);
+  const [changeState, setChangeState] = useState(false);
 
   useEffect(() => {
     const getIzborneJedinice = async () => {
@@ -18,17 +19,16 @@ const Sifrarnik = () => {
       };
   
       getIzborneJedinice();
-    }, []);
+    }, [changeState]);
 
-    async function deleteIzbornaJedinica() {
-    //   await deletePolitickaStranka(imepolitickestranke).
-    //   then(response => {
-    //     console.log(response.data);
-    //     setChangeState(!changeState)
-    //   })
-    //   .catch(error => {
-    //       console.error('Error deleting party:', error);
-    //   });
+    async function deleteConstituency(rednibrojizbjed) {
+        await deleteIzbornaJedinica(rednibrojizbjed).
+        then(response => {
+            setChangeState(!changeState)
+        })
+        .catch(error => {
+            console.error('Error deleting izborna jedinica:', error);
+        });
     }
 
     async function editIzbornaJedinica() {
@@ -46,21 +46,19 @@ const Sifrarnik = () => {
       <div>
         <h1>Izborne jedinice</h1>
         <button onClick={() => {
-              navigate('');
+              navigate('./create');
             }}>Stvori novu izbornu jedinicu</button>
         <ul>
           {izborneJedinice.map(izbornaJedinica => (
             <li key={izbornaJedinica.rednibrojizbjed}>
-                <button
-                  onClick={() => {
-                  }}>{izbornaJedinica.rednibrojizbjed}</button>
+                {izbornaJedinica.rednibrojizbjed}&nbsp;
                 {izbornaJedinica.opis}&nbsp;
                 {izbornaJedinica.brojbirača}
-                <button onClick={() => {
+                {/* <button onClick={() => {
                   editIzbornaJedinica();
-                }}>Uredi izbornu jedinicu</button>
+                }}>Uredi izbornu jedinicu</button> */}
                 <button onClick={() => {
-                  deleteIzbornaJedinica();
+                  deleteConstituency(izbornaJedinica.rednibrojizbjed);
                 }}>Obriši izbornu jedinicu</button>
             </li>
           ))}

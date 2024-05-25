@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import MasterDetailCreate from './views/MasterDetail/create';
 import EditZastupnikForm from './views/MasterDetailForm/edit';
 import Sifrarnik from './views/Sifrarnik/index';
+import SifrarnikCreate from './views/Sifrarnik/create';
 import Header from './component/header'
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
         <Routes>
           <Route path="/" element={<MasterDetail/>}/>
           <Route path="/sifrarnik" element={< Sifrarnik/>}/>
+          <Route path="/sifrarnik/create" element={< SifrarnikCreate/>}/>
           <Route path="/masterDetailForm/:name" element={<MasterDetailForm/>}/>
           <Route path="/masterDetail/create" element={<MasterDetailCreate/>}/>
           <Route path="/zastupnici/:id/edit" element={<EditZastupnikForm />} />
