@@ -1,13 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { fetchPolitickaStranka, fetchZastupnici, fetchImeVrstePolitickeStranke, deleteZastupnik} from '../../services/api';
+import { fetchPolitickaStranka, fetchZastupnici, fetchImeVrstePolitickeStranke, deleteZastupnik, updatePolitickaStranka, fetchVrstePolitickeStranke} from '../../services/api';
 import { useNavigate } from "react-router-dom";
 
 const MasterDetailForm = () => {
 
     const navigate = useNavigate(); 
-    const [politickaStranka, setPolitickaStranka] = useState([]);
+
+    const [politickaStranka, setPolitickaStranka] = useState({
+      imepolitičkestranke: '',
+      kratkiopisstranke: '',
+      oznakavrstepolitičkestranke: ''
+    });
     const [zastupnici, setZastupnici] = useState([]);
     const [imeVrstePolitickeStranke, setImeVrstePolitickeStranke] = useState([]);
+    const [vrstePolitickeStranke, setVrstePolitickeStranke] = useState([]);
 
     var str = window.location.href;
     var n = str.lastIndexOf('/');
@@ -33,10 +39,39 @@ const MasterDetailForm = () => {
           console.error('Error fetching zastupnici:', error);
       }
     };
+
+    const getVrsteStranka = async () => {
+      try {
+          const response = await fetchVrstePolitickeStranke();
+          setVrstePolitickeStranke(response);
+      } catch (error) {
+          console.error('Error fetching politicke stranke:', error);
+      }
+    };
+
     useEffect(() => {
       getPolitickaStranka();
       getZastupnici();
+      getVrsteStranka();
     }, []);
+
+    const handleChange = (e) => {
+      const { name, value } = e.target;
+      setPolitickaStranka(prevData => ({
+        ...prevData,
+        [name]: value
+      }));
+    };
+  
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      try {
+        await updatePolitickaStranka(name, politickaStranka);
+        navigate(`/masterDetailForm/${politickaStranka.imepolitičkestranke}`);
+      } catch (error) {
+        console.error('Error updating political party:', error);
+      }
+    };
 
     const izbrisiZastupnika = async(imezastupnika, imepolitičkestranke) => {
       try {
@@ -53,17 +88,43 @@ const MasterDetailForm = () => {
           <button onClick={() => {navigate('/');}}>Nazad</button>
         </div>
         <h1>Master</h1>
+        <form onSubmit={handleSubmit}>
           <div className='name'>
-            Ime političke stranke: {politickaStranka.imepolitičkestranke}
+            Ime političke stranke:
+            <input
+              type="text"
+              name="imepolitičkestranke"
+              value={politickaStranka.imepolitičkestranke}
+              disabled
+              onChange={handleChange}
+              style={{width:'20%'}}
+            />
           </div>
           <div className='description'>
-            Opis stranke: {politickaStranka.kratkiopisstranke}
+            Opis stranke:
+            <textarea
+              name="kratkiopisstranke"
+              rows="4"
+              cols="50"
+              value={politickaStranka.kratkiopisstranke}
+              onChange={handleChange}
+            />
           </div>
           <div className='type'>
-            Vrsta stranke: {imeVrstePolitickeStranke}
+            Vrsta stranke:
+            <select 
+            name="oznakavrstepolitičkestranke" 
+            value={politickaStranka.oznakavrstepolitičkestranke} onChange={handleChange}>
+              {vrstePolitickeStranke.map((vrsta) => (
+                <option key={vrsta.oznakavrstepolitičkestranke} value={vrsta.oznakavrstepolitičkestranke}>
+                  {vrsta.imevrstepolitičkestranke}
+                </option>
+              ))}
+            </select>
           </div>
+          <button type="submit">Spremi promjene</button>
+        </form>
         <div>--------------------------------------</div>
-        <button onClick={() => {navigate(`/`)}}>Promijeni</button>
         <h1>Detail</h1>
         <button onClick={() => {navigate(`/zastupnici/add/${name}`)}}>Dodaj</button>
         <ul>

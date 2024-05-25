@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { fetchPolitickeStranke, deletePolitickaStranka } from '../../services/api';
+import { fetchPolitickeStranke, deletePolitickaStranka, fetchImeVrstePolitickeStranke, fetchVrstePolitickeStranke } from '../../services/api';
 import { useNavigate } from "react-router-dom";
 
 const MasterDetail = () => {
@@ -7,7 +7,7 @@ const MasterDetail = () => {
   const navigate = useNavigate(); 
   const [politickeStranke, setPolitickeStranke] = useState([]);
   const [changeState, setChangeState] = useState(false);
-
+  const [vrstePolitickeStranke, setVrstePolitickeStranke] = useState([]);
   
   function masterDetailForm(imepolitičkestranke) {
     navigate('/masterDetailForm/'+imepolitičkestranke);
@@ -22,8 +22,18 @@ const MasterDetail = () => {
           console.error('Error fetching politicke stranke:', error);
         }
       };
+    
+    const getVrsteStranke = async () => {
+      try {
+        const response = await fetchVrstePolitickeStranke();
+        setVrstePolitickeStranke(response); 
+      } catch (error) {
+        console.error('Error fetching vrstu politicke stranke:', error);
+      }
+    };
   
       getPolitickeStranke();
+      getVrsteStranke();
     }, [changeState]);
 
     async function deleteParty(imepolitickestranke) {
@@ -52,6 +62,12 @@ const MasterDetail = () => {
                   }}>{politickaStranka.imepolitičkestranke}</button>
                 {politickaStranka.kratkiopisstranke}&nbsp;
                 {politickaStranka.oznakavrstepolitičkestranke}
+                {vrstePolitickeStranke.find(vrsta => vrsta.oznakavrstepolitičkestranke === politickaStranka.oznakavrstepolitičkestranke) &&
+                  <span>
+                    &nbsp;-&nbsp;
+                    {vrstePolitickeStranke.find(vrsta => vrsta.oznakavrstepolitičkestranke === politickaStranka.oznakavrstepolitičkestranke).imevrstepolitičkestranke}
+                  </span>
+                }
                 <button onClick={() => {
                   deleteParty(politickaStranka.imepolitičkestranke);
                 }}>Obriši stranku</button>

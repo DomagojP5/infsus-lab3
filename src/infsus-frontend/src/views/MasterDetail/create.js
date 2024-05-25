@@ -89,7 +89,13 @@ const MasterDetailCreate = () => {
             <div>
                 <label>
                     Opis stranke:
-                    <textarea name="kratkiopisstranke" value={kratkiopisstranke} onChange={handleOpisChange} />
+                    <textarea 
+                        name="kratkiopisstranke" 
+                        rows="4"
+                        cols="50"
+                        value={kratkiopisstranke} 
+                        onChange={handleOpisChange} 
+                    />
                 </label>
                 {errors.kratkiopisstranke && <div style={{ color: 'red' }}>{errors.kratkiopisstranke}</div>}
             </div>
@@ -99,7 +105,7 @@ const MasterDetailCreate = () => {
                     <select name="oznakavrstepolitickestranke" value={oznakavrstepolitickestranke} onChange={handleVrstaChange}>
                         {vrstePolitickeStranke.map((vrsta) => (
                             <option key={vrsta.oznakavrstepolitičkestranke} value={vrsta.oznakavrstepolitičkestranke}>
-                                {vrsta.oznakavrstepolitičkestranke} {vrsta.imevrstepolitičkestranke}
+                                {vrsta.imevrstepolitičkestranke}
                             </option>
                         ))}
                     </select>

@@ -34,6 +34,18 @@ export const deletePolitickaStranka = async (imepolitickestranke) => {
   }
 };
 
+export const updatePolitickaStranka = async (name, politickaStranka) => {
+  const { imepolitičkestranke, kratkiopisstranke, oznakavrstepolitičkestranke } = politickaStranka;
+
+  const response = await api.put(`/politickeStranke/${name}`, {
+    novoIme: imepolitičkestranke,
+    kratkiopisstranke,
+    oznakavrstepolitičkestranke
+  });
+  
+  return response.data;
+};
+
 //zastupnik
 export const fetchZastupnici = async (name) => {
   try {

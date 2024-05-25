@@ -1,4 +1,5 @@
 const PolitickaStranka = require('../models/PolitickaStranka');
+const Zastupnik = require('../models/Zastupnik');
 
 exports.getAllPolitickeStranke = async (req, res) => {
   try {
@@ -42,6 +43,36 @@ exports.deletePolitickaStranka = async (req, res) => {
       where: {imepolitičkestranke: imepolitickestranke}
     })
     res.json(politickaStranka);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+exports.updatePolitickaStranka = async (req, res) => {
+  const { name } = req.params;
+  const { novoIme, kratkiopisstranke, oznakavrstepolitičkestranke } = req.body;
+
+  try {
+    const novaStranka = await PolitickaStranka.findOne({ where: { imepolitičkestranke: name } });
+
+    if (!novaStranka) {
+      return res.status(404).json({ message: `Politicka stranka s imenom ${name} ne postoji.` });
+    }
+
+    await novaStranka.update({
+      kratkiopisstranke: kratkiopisstranke,
+      oznakavrstepolitičkestranke: oznakavrstepolitičkestranke,
+    });
+
+    const noviZastupnici = await Zastupnik.findAll({ where: { imepolitičkestranke: novoIme } });
+    await Promise.all(
+      noviZastupnici.map(async (zastupnik) => {
+        zastupnik.imepolitičkestranke = novoIme;
+        await zastupnik.save();
+      })
+    );
+
+    res.json({ stranka: novaStranka, zastupnici: noviZastupnici });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
