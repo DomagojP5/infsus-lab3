@@ -7,10 +7,6 @@ jest.mock('../../../models/PolitickaStranka');
 
 describe('PolitickaStranka model i kontroler', () => {
 
-    beforeEach(async () => {
-        await sequelize.sync({ force: true });
-    });
-
     describe('PolitickaStranka model unit testovi', () => {
         it('treba stvoriti novu instancu politicke stranke', async () => {
             const mockPolitickaStranka = {
