@@ -1,6 +1,5 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/testdb');
-//const Zastupnik = require('./Zastupnik');
 
 const IzbornaJedinica = sequelize.define('IzbornaJedinica', {
   rednibrojizbjed: {
@@ -21,6 +20,5 @@ const IzbornaJedinica = sequelize.define('IzbornaJedinica', {
   timestamps: false,
 });
 
-//IzbornaJedinica.hasMany(Zastupnik);
 
 module.exports = IzbornaJedinica;

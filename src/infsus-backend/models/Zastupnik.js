@@ -42,9 +42,4 @@ const Zastupnik = sequelize.define('Zastupnik', {
   timestamps: false,
 });
 
-//Zastupnik.belongsTo(IzbornaJedinica, { foreignKey: 'rednibrojizbjed' });
-//IzbornaJedinica.hasMany(Zastupnik);
-//Zastupnik.belongsTo(PolitickaStranka, { foreignKey: 'imepolitičkestranke' });
-//PolitickaStranka.hasMany(Zastupnik);
-
 module.exports = Zastupnik;

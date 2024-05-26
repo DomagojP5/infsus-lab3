@@ -24,6 +24,4 @@ const PolitickaStranka = sequelize.define('PolitickaStranka', {
     timestamps: false,
 })
 
-//PolitickaStranka.hasMany(Zastupnik);
-
 module.exports = PolitickaStranka;
