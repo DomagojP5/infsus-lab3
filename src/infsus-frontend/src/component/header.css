@@ -1,10 +1,13 @@
 .header {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
     padding-right: 4vw;
     padding-left: 2vw;
     height: 10vh;
-    background-color: var(--lightBrown);
     font-weight: bold;
+    background-color: bisque;
+}
+.buttonLink {
+    font-size: 25px;
 }

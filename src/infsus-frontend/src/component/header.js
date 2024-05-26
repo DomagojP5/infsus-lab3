@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect} from 'react';
 import './header.css';
 import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   
-  //const navigate = useNavigate(); 
-  //const [, ] = useState([]);
+  const navigate = useNavigate(); 
 
   useEffect(() => {
 
@@ -14,10 +13,10 @@ const Header = () => {
     return (
       <div className='header'>
         <div className='site'>
-            <a href='/' className='navbar-item-link'>Master-detail</a>
+          <button className = "buttonLink" onClick={() => {navigate('/')}}>Master-detail</button>
         </div>
         <div className='site'>
-            <a href='/sifrarnik' className='navbar-item-link'>Šifrarnik detaila</a>
+          <button className = "buttonLink" onClick={() => {navigate('/sifrarnik')}}>Šifrarnik detaila</button>
         </div>
       </div>
     );

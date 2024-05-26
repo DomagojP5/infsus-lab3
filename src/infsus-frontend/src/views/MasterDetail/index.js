@@ -59,8 +59,8 @@ const MasterDetail = () => {
   }
   
     return (
-      <div>
-        <h1>Političke stranke</h1>
+      <div className='app'>
+        <h1> Političke stranke</h1>
         <div className = "inputBar">
           <label>Pretraži </label>
           <input style={{width: "270px"}} type = "text" onChange = {(e) => {setQuery(e.target.value)}} />
@@ -77,18 +77,18 @@ const MasterDetail = () => {
           <button onClick={() => {
                 navigate('/masterDetail/create');
               }}>Stvori novu stranku</button>
-          <ul>
+          <ul className = "entity">
             {politickeStranke.map(politickaStranka => (
-              <li key={politickaStranka.imepolitičkestranke}>
+              <li className = "entity2" key={politickaStranka.imepolitičkestranke}>
                   <button
                     onClick={() => {
                       masterDetailForm(politickaStranka.imepolitičkestranke)
                     }}>{politickaStranka.imepolitičkestranke}</button>
-                  {politickaStranka.kratkiopisstranke}&nbsp;
-                  {politickaStranka.oznakavrstepolitičkestranke}
+                  <div className='description'> 
+                    {politickaStranka.kratkiopisstranke}
+                  </div>
                   {vrstePolitickeStranke.find(vrsta => vrsta.oznakavrstepolitičkestranke === politickaStranka.oznakavrstepolitičkestranke) &&
                     <span>
-                      &nbsp;-&nbsp;
                       {vrstePolitickeStranke.find(vrsta => vrsta.oznakavrstepolitičkestranke === politickaStranka.oznakavrstepolitičkestranke).imevrstepolitičkestranke}
                     </span>
                   }

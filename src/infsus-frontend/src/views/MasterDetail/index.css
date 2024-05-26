@@ -22,3 +22,19 @@
     background-color: blanchedalmond;
     border: 1px solid brown;
 }
+.app {
+    margin-left: 15px;
+}
+.entity {
+    margin-right: 40px;
+    margin-top: 10px;
+}
+.entity2 {
+    margin-right: 40px;
+    margin-top: 15px;
+    display: grid;
+    grid-template-columns: 1fr 6fr 2fr 1fr;
+}
+.description {
+    margin-left: 15px;
+}

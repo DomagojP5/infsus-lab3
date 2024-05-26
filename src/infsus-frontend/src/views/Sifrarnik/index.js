@@ -43,7 +43,7 @@ const Sifrarnik = () => {
     const filteredItems = getFilteredItems(query, izborneJedinice)
   
     return (
-      <div>
+      <div className='app'>
         <h1>Izborne jedinice</h1>
 
         <div className = "inputBar">
@@ -62,13 +62,15 @@ const Sifrarnik = () => {
         <button onClick={() => {
               navigate('./create');
             }}>Stvori novu izbornu jedinicu</button>
-        <ul>
+        <ul className = "entity">
           {izborneJedinice.sort((a, b) => a.rednibrojizbjed - b.rednibrojizbjed).map(izbornaJedinica => (
-            <li key={izbornaJedinica.rednibrojizbjed}>
-                {izbornaJedinica.rednibrojizbjed}&nbsp;
-                {izbornaJedinica.opis}&nbsp;
+            <li className = "entity21" key={izbornaJedinica.rednibrojizbjed}>
+                {izbornaJedinica.rednibrojizbjed}
+                <div className='description'> 
+                  {izbornaJedinica.opis}
+                </div>
                 {izbornaJedinica.brojbirača}
-                <button onClick={() => {
+                <button className='editButton' onClick={() => {
                   navigate('./edit/'+izbornaJedinica.rednibrojizbjed);
                 }}>Uredi izbornu jedinicu</button>
                 <button onClick={() => {
