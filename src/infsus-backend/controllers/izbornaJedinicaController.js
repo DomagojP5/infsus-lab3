@@ -67,9 +67,9 @@ exports.deleteIzbornaJedinica = async (req, res) => {
     const izbornaJedinica = await IzbornaJedinica.destroy({
       where: {rednibrojizbjed: rednibrojizbjed}
     })
-    if (!izbornaJedinica) return res.status(404).json({});
-    return res.json(izbornaJedinica);
+    if (!izbornaJedinica) return res.status(404).json({ message: 'Izborna jedinica not found' });
+    return res.status(200).json({message: 'Izborna jedinica deleted successfully'});
   } catch (error) {
-    res.status(500).json({ message: req.params });
+    res.status(500).json({ message: error.message });
   }
 };

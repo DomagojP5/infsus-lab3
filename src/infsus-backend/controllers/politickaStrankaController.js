@@ -51,7 +51,10 @@ exports.deletePolitickaStranka = async (req, res) => {
     const politickaStranka = await PolitickaStranka.destroy({
       where: {imepolitičkestranke: imepolitickestranke}
     })
-    res.json(politickaStranka);
+    if (!politickaStranka) {
+      return res.status(404).json({ message: 'Politicka stranka ne postoji.' });
+    }
+    return res.status(200).json({ message: 'Politicka stranka uspjesno izbrisana.'});
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
