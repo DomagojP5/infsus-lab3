@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { fetchIzborneJedinice, deleteIzbornaJedinica } from '../../services/api';
 import { useNavigate } from "react-router-dom";
+import './index.css'
 
 const Sifrarnik = () => {
   
   const navigate = useNavigate(); 
   const [izborneJedinice, setIzborneJedinice] = useState([]);
   const [changeState, setChangeState] = useState(false);
+  const [query, setQuery] = useState("")
 
   useEffect(() => {
     const getIzborneJedinice = async () => {
@@ -31,13 +33,32 @@ const Sifrarnik = () => {
         });
     }
 
-    async function editIzbornaJedinica() {
-
+    const getFilteredItems = (query, items) => {
+      if (!query) {
+        return items;
+      }
+      return items.filter((izbornaJedinica) => izbornaJedinica.opis.toLowerCase().includes(query.toLowerCase()));
     }
+  
+    const filteredItems = getFilteredItems(query, izborneJedinice)
   
     return (
       <div>
         <h1>Izborne jedinice</h1>
+
+        <div className = "inputBar">
+          <label>Pretraži </label>
+          <input style={{width: "270px"}} type = "text" onChange = {(e) => {setQuery(e.target.value)}} />
+        </div>
+        <div className = "searchBar">
+          <ul className = "search">
+              {filteredItems.map((value) => (
+                <div className='searchArea' key={value.rednibrojizbjed}>
+                  <div onClick={()=>navigate('./edit/'+value.rednibrojizbjed)}>{value.opis}</div></div>
+              ))}
+          </ul>
+        </div>
+        
         <button onClick={() => {
               navigate('./create');
             }}>Stvori novu izbornu jedinicu</button>

@@ -1,0 +1,24 @@
+.searchBar {
+    height: 200px;
+    display: flex;
+    padding: 0px;
+    margin: 0px;
+}
+.searchArea {
+    margin:0 auto;
+    position:relative;
+    border: 1px solid burlywood;
+}
+.searchArea:hover {
+    background-color: red;
+}
+.search {
+    margin-left: 55px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    overflow-y: scroll;
+    width: 300px;
+    padding-left: 0px;
+    background-color: blanchedalmond;
+    border: 1px solid brown;
+}
