@@ -14,6 +14,7 @@ const MasterDetailForm = () => {
     const [zastupnici, setZastupnici] = useState([]);
     const [imeVrstePolitickeStranke, setImeVrstePolitickeStranke] = useState([]);
     const [vrstePolitickeStranke, setVrstePolitickeStranke] = useState([]);
+    const [errors, setErrors] = useState({});
 
     var str = window.location.href;
     var n = str.lastIndexOf('/');
@@ -65,11 +66,18 @@ const MasterDetailForm = () => {
   
     const handleSubmit = async (e) => {
       e.preventDefault();
-      try {
-        await updatePolitickaStranka(name, politickaStranka);
-        navigate(`/masterDetailForm/${politickaStranka.imepolitičkestranke}`);
-      } catch (error) {
-        console.error('Error updating political party:', error);
+      const newErrors = {};
+      if (!politickaStranka.kratkiopisstranke) newErrors.kratkiopisstranke = "Opis stranke je obavezan"
+      if (politickaStranka.kratkiopisstranke.length > 200) newErrors.kratkiopisstranke = "Opis stranke mora biti kraći od 200 znakova"
+      if (Object.keys(newErrors).length > 0) {
+        setErrors(newErrors);
+      } else {
+        try {
+          await updatePolitickaStranka(name, politickaStranka);
+          navigate(`/masterDetailForm/${politickaStranka.imepolitičkestranke}`);
+        } catch (error) {
+          console.error('Error updating political party:', error);
+        }
       }
     };
 
@@ -110,6 +118,7 @@ const MasterDetailForm = () => {
               onChange={handleChange}
             />
           </div>
+          {errors.kratkiopisstranke && <div style={{ color: 'red' }}>{errors.kratkiopisstranke}</div>}
           <div className='type'>
             Vrsta stranke:
             <select 

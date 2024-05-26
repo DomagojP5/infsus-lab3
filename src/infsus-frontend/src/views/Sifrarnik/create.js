@@ -41,10 +41,14 @@ const SifrarnikCreate = () => {
         
         try { // složenije pravilo
             const response = await fetchIzborneJedinice();
-            let maxNumber = response[0].brojbirača;
+            let maxNumber = 0;
             let sum = 0;
             for (let i = 1; i < response.length; ++i) {
-                sum = sum + response[i].brojbirača;
+                if (response[i].rednibrojizbjed === 0) {
+                    maxNumber = response[i].brojbirača;
+                } else {
+                    sum = sum + response[i].brojbirača;
+                }
             }
             let current = sum;
             sum = sum + parseInt(brojBiraca);
