@@ -3,6 +3,9 @@ const Zastupnik = require('../models/Zastupnik');
 exports.getAllZastupnici = async (req, res) => {
   try {
     const zastupnici = await Zastupnik.findAll();
+    if (!zastupnici) {
+      return res.status(404).json();
+    }
     res.json(zastupnici);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -15,6 +18,9 @@ exports.getZastupnici = async (req, res) => {
     const zastupnici = await Zastupnik.findAll({
       where: { imepolitičkestranke: name }
     });
+    if (!zastupnici) {
+      return res.status(404).json();
+  }
     res.json(zastupnici);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -45,34 +51,41 @@ exports.updateZastupnik = async (req, res) => {
       return res.status(404).json({ message: 'Zastupnik not found' });
     }
 
-    zastupnik.imezastupnika = imezastupnika;
-    zastupnik.godinezastupnika = godinezastupnika;
-    zastupnik.spolzastupnika = spolzastupnika;
-    zastupnik.rednibrojizbjed = rednibrojizbjed;
-    zastupnik.imepolitickestranke = imepolitickestranke;
-
-    await zastupnik.save();
-    res.status(200).json(zastupnik);
+    try {
+      zastupnik.imezastupnika = imezastupnika;
+      zastupnik.godinezastupnika = godinezastupnika;
+      zastupnik.spolzastupnika = spolzastupnika;
+      zastupnik.rednibrojizbjed = rednibrojizbjed;
+      zastupnik.imepolitickestranke = imepolitickestranke;
+      await zastupnik.save();
+    } catch (error) {
+      return res.status(400).json({});
+    }
+    return res.status(200).json(zastupnik);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    return res.status(500).json({ message: error.message });
   }
 };
 
 exports.createZastupnik = async (req, res) => {
     try {
         const { imezastupnika, godinezastupnika, spolzastupnika, rednibrojizbjed, imepolitičkestranke } = req.body;
-        const newZastupnik = await Zastupnik.create({
-            imezastupnika: imezastupnika,
-            godinezastupnika: godinezastupnika, 
-            spolzastupnika: spolzastupnika,
-            rednibrojizbjed: rednibrojizbjed,
-            imepolitičkestranke: imepolitičkestranke
-        });
+        let newZastupnik;
+        try {
+          newZastupnik = await Zastupnik.create({
+              imezastupnika: imezastupnika,
+              godinezastupnika: godinezastupnika, 
+              spolzastupnika: spolzastupnika,
+              rednibrojizbjed: rednibrojizbjed,
+              imepolitičkestranke: imepolitičkestranke
+          });
+        } catch (error) {
+          return res.status(400).json({});
+        }
 
-        res.status(201).json(newZastupnik);
+        return res.status(201).json(newZastupnik);
     } catch (error) {
-        console.error('Error creating zastupnik:', error);
-        res.status(500).json({ message: 'Internal Server Error' });
+        return res.status(500).json({ message: error.message });
     }
 };
 
@@ -85,9 +98,9 @@ exports.deleteZastupnik = async (req, res) => {
         imepolitičkestranke: imepolitickestranke
       }
     });
-    res.json(zastupnik);
+    if (!zastupnik) return res.status(404).json({})
+    return res.json(zastupnik);
   } catch (error) {
-    console.error('Error deleting zastupnik:', error);
-    res.status(500).json({ message: error.message });
+    return res.status(500).json({ message: error.message });
   }
 }

@@ -45,10 +45,6 @@ exports.updateIzbornaJedinica = async (req, res) => {
 
   try {
     const { rednibrojizbjed, opis, brojbirača} = req.body;
-    console.log(rednibrojizbjed)
-    console.log(opis)
-    console.log(brojbirača)
-    
     const izbornaJedinica = await IzbornaJedinica.findByPk(rednibrojizbjed);
     if (!izbornaJedinica) {
       return res.status(404).json({ message: 'Izborna jedinica not found' });
@@ -71,7 +67,8 @@ exports.deleteIzbornaJedinica = async (req, res) => {
     const izbornaJedinica = await IzbornaJedinica.destroy({
       where: {rednibrojizbjed: rednibrojizbjed}
     })
-    res.json(izbornaJedinica);
+    if (!izbornaJedinica) return res.status(404).json({});
+    return res.json(izbornaJedinica);
   } catch (error) {
     res.status(500).json({ message: req.params });
   }

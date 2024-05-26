@@ -1,5 +1,5 @@
 const { DataTypes } = require('sequelize');
-const sequelize = require('../config/db');
+const sequelize = require('../config/testdb');
 const IzbornaJedinica = require('./IzbornaJedinica');
 const PolitickaStranka = require('./PolitickaStranka');
 
@@ -27,14 +27,14 @@ const Zastupnik = sequelize.define('Zastupnik', {
     allowNull: false,
     references: {
       model: IzbornaJedinica,
-      key: 'redniBrojIzbJed',
+      key: 'rednibrojizbjed',
     },
   },
   imepolitičkestranke: {
     type: DataTypes.STRING(100),
     references: {
       model: PolitickaStranka,
-      key: 'imePolitičkeStranke',
+      key: 'imepolitičkestranke',
     },
   },
 }, {

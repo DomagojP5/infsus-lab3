@@ -4,6 +4,9 @@ const Zastupnik = require('../models/Zastupnik');
 exports.getAllPolitickeStranke = async (req, res) => {
   try {
     const politickeStranke = await PolitickaStranka.findAll();
+    if (!politickeStranke) {
+      return res.status(404).json({ message: 'Political party not found' });
+    }
     res.json(politickeStranke);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -14,6 +17,9 @@ exports.getPolitickaStranka = async (req, res) => {
   const name = req.params.name;
   try {
     const politickaStranka = await PolitickaStranka.findByPk(name);
+    if (!politickaStranka) {
+      return res.status(404).json({ message: 'Political party not found' });
+    }
     res.json(politickaStranka);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -30,6 +36,9 @@ exports.putPolitickaStranka = async (req, res) => {
       kratkiopisstranke: kratkiopisstranke,
       oznakavrstepolitičkestranke:oznakavrstepolitickestranke
     })
+    if (!politickaStranka) {
+      return res.status(500).json();
+    }
     res.json(politickaStranka);
   } catch (error) {
     res.status(500).json({ message: error.message });

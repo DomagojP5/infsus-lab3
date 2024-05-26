@@ -1,6 +1,6 @@
 const { DataTypes } = require('sequelize');
-const sequelize = require('../config/db');
-//const Zastupnik = require('./Zastupnik');
+const sequelize = require('../config/testdb');
+const VrstaPolitickeStranke = require('./VrstaPolitickeStranke');
 
 const PolitickaStranka = sequelize.define('PolitickaStranka', {
     imepolitičkestranke: {
@@ -14,7 +14,10 @@ const PolitickaStranka = sequelize.define('PolitickaStranka', {
     },
     oznakavrstepolitičkestranke: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        references: {
+            model: VrstaPolitickeStranke,
+            key: 'oznakavrstepolitičkestranke',
+          },
     }
 }, {
     tableName: "politiČka_stranka",
